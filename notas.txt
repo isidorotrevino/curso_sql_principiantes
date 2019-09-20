@@ -1,0 +1,16 @@
+Normalizacion
+
+https://www.guru99.com/database-normalization.html
+
+https://www.studytonight.com/dbms/database-normalization.php
+
+https://towardsdatascience.com/database-normalization-explained-53e60a494495
+
+ER
+
+https://www.visual-paradigm.com/guide/data-modeling/what-is-entity-relationship-diagram/
+
+https://www.smartdraw.com/entity-relationship-diagram/
+
+
+https://en.wikipedia.org/wiki/Relational_database

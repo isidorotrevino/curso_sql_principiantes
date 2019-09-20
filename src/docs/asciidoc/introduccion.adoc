@@ -1,0 +1,72 @@
+= Curso de Desarrollo
+Vintec <isidoro.trevino@vintec.mx>
+2019-09-30
+:revnumber: {project-version}
+:example-caption!:
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../java]
+
+== Objetivo
+
+* Al finalizar el curso el alumno comprenderá las nociones básicas acerca 
+de un Motor de Base de datos Relacional (RDBMS) y tendrá los conocimientos 
+necesarios para:
+** Organizar información de manera eficiente
+** Procesar información para generar reportes
+** Analizar grandes cantidades de datos para detectar patrones y/o tendencias
+
+== Temario
+ 
+=== Día 1
+
+* Teoría de Base de datos ( 1 hora )
+** Breve historia y antecedentes        
+** Diseño y estructura de una base de datos
+** Introducción a PostgreSQL
+
+== Día 1
+
+* Modelado de base de datos ( 2 horas )
+** Diagramas  entidad ~ relación
+** Normas Formales     
+* SQL (1 hora)
+** Creación de tablas e índices    
+
+== Día 2
+
+* SQL ( 4 horas )
+** Importación de datos    
+** Inserciones, actualizaciones y eliminaciones             
+** Consultas
+*** Conceptos generales        
+*** Algebra relacional            
+*** Funciones
+
+== Día 3
+
+* SQL ( 4 horas )         
+** Consultas avanzadas        
+** Agrupamiento de información    
+** Vistas
+
+== Día 4
+
+* Herramientas de reporteo ( 4 horas )
+** Jasper Reports
+** Tableau
+
+== Estructura del material
+
+=== Repositorio del material
+
+[source,text]
+----
+https://github.com/isidorotrevino/curso_sql_principiantes
+----
+
+=== Estructura del material
+
+* **src/docs/asciidoc** -> Código fuente de las diapositivas
+* **presentacion** -> La presentación del curso
+* **software** -> Los programas a usar
+* **ejercicios** -> Fuentes para los ejercicios a realizar
