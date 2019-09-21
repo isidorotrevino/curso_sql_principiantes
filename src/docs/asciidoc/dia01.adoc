@@ -1,4 +1,4 @@
-= Curso de Desarrollo
+= Curso de Base de Datos
 Vintec <isidoro.trevino@vintec.mx>
 2019-09-30
 :revnumber: {project-version}
