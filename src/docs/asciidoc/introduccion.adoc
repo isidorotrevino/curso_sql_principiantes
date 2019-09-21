@@ -24,7 +24,7 @@ necesarios para:
 ** Diseño y estructura de una base de datos
 ** Introducción a PostgreSQL
 
-== Día 1
+=== Día 1
 
 * Modelado de base de datos ( 2 horas )
 ** Diagramas  entidad ~ relación
@@ -32,7 +32,7 @@ necesarios para:
 * SQL (1 hora)
 ** Creación de tablas e índices    
 
-== Día 2
+=== Día 2
 
 * SQL ( 4 horas )
 ** Importación de datos    
@@ -42,14 +42,14 @@ necesarios para:
 *** Algebra relacional            
 *** Funciones
 
-== Día 3
+=== Día 3
 
 * SQL ( 4 horas )         
 ** Consultas avanzadas        
 ** Agrupamiento de información    
 ** Vistas
 
-== Día 4
+=== Día 4
 
 * Herramientas de reporteo ( 4 horas )
 ** Jasper Reports
@@ -64,9 +64,21 @@ necesarios para:
 https://github.com/isidorotrevino/curso_sql_principiantes
 ----
 
+image::qrcode.png[]
+
 === Estructura del material
 
 * **src/docs/asciidoc** -> Código fuente de las diapositivas
 * **presentacion** -> La presentación del curso
 * **software** -> Los programas a usar
 * **ejercicios** -> Fuentes para los ejercicios a realizar
+
+=== Nomenclatura de código
+
+* **{ valor }** -> Indican un valor obligatorio
+* **[ valor ]** -> Indican un valor opcional
+* **[, valor ]** -> Indica que pueden existir múltiples valores (opcionales)
+* **[ ... ]** -> Indica que la definición del valor se encuentra en otro
+lugar de la documentación
+* **valor1 | valor2** -> Indica que se debe indicar el 1er o 2do valor
+ 
