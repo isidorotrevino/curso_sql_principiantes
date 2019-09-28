@@ -1,0 +1,494 @@
+= Curso de Base de Datos
+Vintec <isidoro.trevino@vintec.mx>
+2019-09-29
+:revnumber: {project-version}
+:example-caption!:
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../java]
+
+
+== Preámbulo
+
+image::standards.png[]
+
+== Modelo de datos (Pagila)
+
+image::pagila.png[]
+
+== Modelos de datos
+
+=== Repaso de la clase anterior
+
+* Normalización 
+** **1NF** -> Cada registro único, cada atributo con 1 valor, todos del mismo tipo
+** **2NF** -> Todos los registros identificables, no dependencias parciales (Llave primaria)
+** **3NF** -> No dependencias transitivas (Relaciones ligadas por llaves foráneas)
+
+=== SCHEMA
+
+* Un esquema (schema) es una representación lógica que nos permite agrupar tablas
+vistas y otros objetos
+* Todas las tablas tienen un esquema "public" por defecto
+
+=== Ejercicio de normalización
+
+* Registro de pinturas del MOMA
+** https://github.com/MuseumofModernArt/collection
+** Folder ejericios
+*** Artists.csv
+*** Artworks.csv
+
+== SQL
+
+=== DDL
+
+* **Data Definition Language**
+** Subconjunto de SQL orientado a la definición de estructura de datos:
+*** Bases de datos
+*** Tablas
+*** Indices
+** Definido en SQL-92
+
+=== DDL
+
+WARNING: Todas las acciones son definitivas
+
+=== Creación de base de datos
+
+[source,sql]
+----
+CREATE DATABASE {nombre_de_la_base}
+[ WITH OWNER = {usuario} ]
+[ ENCODING = 'UTF8' ]
+----
+
+=== Eliminación de base de datos
+
+WARNING: Mucho cuidado al utilizarse (No existe el "undo")
+
+[source,sql]
+----
+DROP DATABASE {nombre_de_la_base}
+----
+
+=== Renombrado de base de datos
+
+[source,sql]
+----
+ALTER DATABASE {nombre} RENAME TO {nuevo_nombre}
+----
+
+=== Manejo de usuarios
+
+* Varía dependiendo del RDBMS
+* Se recomienda usar las herramientas de administración para su uso
+
+[source,sql]
+----
+CREATE ROLE {usuario}
+ [ [ WITH ] PASSWORD '{contraseña}' [ ... ] ]
+----
+
+=== Asignación de permisos
+
+* También se recomienda el uso de herramientas de administración
+
+[source,sql]
+----
+GRANT ALL ON DATABASE {bd} to {usuario};
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA {schema} 
+TO {usuario};
+----
+
+=== Creación de tablas
+
+[source,sql]
+----
+CREATE TABLE [ IF NOT EXISTS ] nombre_tabla ( [
+  { nombre_columna tipo_dato [ contraint_columna [ ... ] ]
+    | constraint_tabla }  )
+----
+
+=== Eliminación de tablas
+
+WARNING: Mucho cuidado al utilizarse (No existe el "undo")
+
+[source,sql]
+----
+DROP TABLE {nombre_tabla}
+----
+
+=== Modificación de tablas
+
+* Renombrado 
+
+[source,sql]
+----
+ALTER TABLE {nombre_tabla} RENAME TO {nueva_tabla}
+----
+
+=== Renombrado de columnas
+
+[source,sql]
+----
+ALTER TABLE {nombre_tabla} RENAME COLUMN {nombre_columna} 
+RENAME TO {nueva_columna}
+----
+
+=== Cambiar el tipo de dato de una columna
+
+[source,sql]
+----
+ALTER TABLE {nombre_tabla} 
+ALTER COLUMN {nombre_columna} TYPE {nuevo_tipo}
+----
+
+=== Encontrar llave primaria de una tabla
+
+* No existe una manera estándar
+* Es mejor usar herramientas administrativas
+* http://wiki.postgresql.org/wiki/Retrieve_primary_key_columns
+
+=== Cambiar la llave primaria de una tabla
+
+[source,sql]
+----
+ALTER TABLE {nombre_tabla} DROP CONSTRAINT 
+{nombre_tabla}_pkey;
+
+ALTER TABLE {nombre_tabla} ADD PRIMARY KEY 
+({nueva_columna}[,...]);
+----
+
+=== Agregar llave foránea
+
+[source,sql]
+----
+ALTER TABLE {tabla}
+ADD CONSTRAINT {nombre_restriccion}
+FOREIGN KEY ({columna})
+REFERENCES {tabla_foranea}({columna_foranea})
+[ON DELETE CASCADE]
+[ON UPDATE CASCADE];
+----
+
+=== Eliminar llave foránea
+
+[source,sql]
+----
+ALTER TABLE {tabla}
+DROP CONSTRAINT {nombre_restriccion};
+----
+
+== Secuencias
+
+* "Objetos" de la base de datos orientados a generar valores únicos
+a demanda
+* Algunos RDBMS utilizan un tipo especial llamado "AUTO_INCREMENT" o
+"IDENTITY"
+* La diferencia de un sequence
+** Siempre proveerá un valor diferente
+** No soporta aislamiento transaccional
+** La generación es personalizable
+
+=== Creación de secuencias
+
+[source,sql]
+----
+CREATE SEQUENCE [IF NOT EXISTS] {secuencia}
+[INCREMENT BY {numero}]
+[START [WITH] {numero}]
+[MAXVALUE {valor_maximo}]
+----
+
+=== Obtener el valor actual de la secuencia
+
+[source,sql]
+----
+SELECT currval('{secuencia}')
+----
+
+=== Obtener el siguiente valor de la secuencia
+
+[source,sql]
+----
+SELECT nextval('{secuencia}')
+----
+
+=== Reasignar el valor de la secuencia
+
+[source,sql]
+----
+SELECT setval('{secuencia}',{valor})
+----
+
+== DML
+
+* **Data Manipulation Language**
+** Subconjunto de SQL orientado a:
+*** **C** -> Crear registros
+*** **R** -> Leer registros
+*** **U** -> Actualizar registros
+*** **D** -> Eliminar registros
+
+=== Importación masiva de datos
+
+* No existe un método estándar
+* Existen estrategias por cada RDBMS
+* La mayoría soportan:
+** Importación/exportación de DUMPS
+** Importación/exportación de SQL Scripts 
+
+=== COPY
+
+* Método que permite leer archivos de texto hacia la base de datos
+** El servidor Postgres (SW) debe tener acceso al archivo
+** La estructura es rígida (si existe una fila con error aborta todo)
+** El mejor formato es utilizar "Texto separado por comas" (CSV)
+
+=== COPY
+
+[source,sql]
+----
+COPY {tabla} ({columna1}[,{columnan} ...])
+FROM {ruta_archivo}
+[ [ WITH ] ( option [, ...] ) ]
+----
+* **option** puede ser:
+** DELIMITER '{caracter}' -> Caracter delimitador
+** QUOTE  '{caracter}' -> Caracter para delimitar texto
+** FORMAT {CSV} -> para indicar texto separado por comas
+** HEADER -> Ignora la primera línea
+
+=== DUMP
+
+* Formatos que permiten un respaldo de la base de datos
+* Generalmente solo son compatibles con una RDBMS particular
+* Pueden existir problemas entre diferentes versiones de una misma
+RDBMS
+
+== Inserciones
+
+* La instrucción INSERT permite insertar(crear) una o más filas
+
+[source,sql]
+----
+INSERT INTO {tabla}
+[({columna} [,...])]
+VALUES ({expresion} [,...])
+----
+
+=== Inserciones
+
+* No importa el orden de las columnas (se especifica en la instrucción)
+* Si no se definen columnas a insertar, se toma el valor default, en caso 
+contrario deja el estado en NULL
+* Se pueden combinar con Secuencias y funciones
+
+== Actualizaciones
+
+* Permite alterar una o más columnas de una o más tuplas
+
+[source,sql]
+----
+UPDATE {tabla}
+SET [ {columna} = {expresion} [, ...] ]
+WHERE [ condicion ]
+----
+
+== Eliminaciones
+
+WARNING: Siempre usar WHERE
+
+[source,sql]
+----
+DELETE FROM {tabla}
+[ WHERE [ condicion ] ]
+----
+
+=== Eliminación total
+
+WARNING: Solo usar en ambientes de prueba
+
+* Sirve para eliminar todas las filas de una tabla
+
+[source,sql]
+----
+TRUNCATE TABLE {tabla}
+----
+
+== Consultas
+
+* A veces se considera como **DQL**
+* Permite aplicar reglas de agrupación, selección y clasificación
+de tablas para generar un resultado
+* **ResultSet** -> Grupo de filas cuyas columnas pueden provenir 
+de una o más fuentes.
+** También contiene la "metadata" o descripción de dicha información
+
+=== SELECT
+
+* En su forma más simple, permite elegir columnas específicas de una
+tabla a partir de condiciones determinadas
+
+[source,sql]
+----
+SELECT [{columna1} [,{columnan},...] | * 
+FROM {tabla} [ AS {alias} ]
+[ WHERE {expresion} ]
+----
+
+=== Algebra Relacional
+
+* Fundamento matemático para la manipulación de series de datos
+* Utilizada de manera interna por los RDBMS para procesar la información
+y generar Result Sets 
+
+=== Joins
+
+* Operación dentro de un select que permite combinar las columnas
+de dos tablas para generar un único result set
+** **Inner Join** -> Integra los resultados donde los valores de las
+columnas comparadas coincidan 
+** **Left Join** -> Integra los resultados donde los valores de las
+columnas comparadas coincidan, o donde los valores de la comparación izquierda
+no coincidan con ningún valor de la derecha
+
+=== Joins
+
+* **Full Outer Join** -> Integra todas las combinaciones posibles
+
+=== Inner Join
+
+image::join.png[]
+
+=== Inner Join
+
+[source,sql]
+----
+SELECT [{columna1} [,{columnan},...] | * 
+FROM {tabla} [ AS {alias} ]
+INNER JOIN {tabla2} [ AS {alias2} ]
+ON {expresion}
+[ WHERE {expresion} ]
+----
+
+=== Left / Right
+
+image::left_join.svg[]
+
+=== Full Outer
+
+image::full_join.svg[]
+
+=== Union
+
+* Permite combinar varios ResultSets en uno solo
+
+[source,sql]
+----
+(SELECT [{columna1} [,{columnan},...] | * 
+FROM {tabla} [ AS {alias} ]
+[ WHERE {expresion} ])
+UNION
+SELECT [{columnaa} [,{columnax},...] | * 
+FROM {tabla2} [ AS {alias2} ]
+[ WHERE {expresion} ]
+----
+
+=== Subqueries
+
+* Cada Query (generalmente un select) devuelve como resultado
+un ResultSet
+* Un ResultSet tiene prácticamente las mismas propiedades de una
+tabla por lo que su comportamiento es similar (aunque no es persistente)
+* Esto permite usar un ResultSet como parte de otro query para procesar
+/ filtrar datos y generar un nuevo Result Set
+
+=== Subqueries
+
+[source,sql]
+----
+SELECT [{columna1} [,{columnan},...] | * 
+FROM {tabla} [ AS {alias} ]
+WHERE columna1 IN (
+	SELECT [...]
+) 
+----
+
+=== Subqueries
+
+[source,sql]
+----
+SELECT [{columna1} [,{columnan},...] | * 
+FROM (
+	SELECT [{columna1} [,{columnan},...] | * 
+	FROM {tabla} [ AS {alias} ]
+	WHERE columna1 IN (
+		SELECT [...]
+	) 
+) AS {alias}
+
+== Funciones
+
+* Las funciones ejecutan una serie de instrucciones que devuelven
+un valor asignable a una columna
+* Las funciones pueden recibir 0, 1 o más argumentos
+* Las funciones regresan un tipo de dato específico
+
+=== Funciones más comunes
+
+* **lower** / **upper** -> Transforman texto en minúsculas / mayúsculas
+* **substring** -> Recortan un texto
+* **trim** -> Eliminan los espacios en los extremos de un texto
+* **replace** -> Reemplaza un pedazo de texto con otro dentro de una columna
+
+=== Funciones más comunes
+
+* **round** -> Redondea un número flotante (decimal)
+* **trunc** -> Elimina los decimales de un número
+* **mod** -> Obtiene el módulo de un número
+* **random** -> Devuelve un número aleatorio
+* **generate_series** -> Genera números secuenciales
+
+=== Funciones más comunes
+
+* **date_part** -> Obtiene una porción de una fecha/hora
+* **current_timestamp** -> Devuelve la fecha/hora actual
+* **interval** -> Tipo de dato para operar con fechas
+
+== Inserciones múltiples
+
+* Se pueden combinar las sentencias **INSERT** con **SELECT**
+para insertar series de datos
+
+[source,sql]
+----
+INSERT INTO {tabla}
+[({columna} [,...])]
+SELECT [{columna1} [,{columnan},...] | * 
+FROM {tabla} [ AS {alias} ]
+[ WHERE {expresion} ]
+----
+
+=== Ejercicio de limpieza de datos
+
+* Limpiar e insertar la información del MoMA en las tablas
+normalizadas
+
+== Indices
+
+* Es una estructura de la base de datos para incrementar la
+velocidad de lectura de información en una tabla
+* Ocupa mayor espacio en almacenamiento
+* Los índices hacen referencia a una o más columnas
+
+=== Indices
+
+[source,sql]
+----
+CREATE [ UNIQUE ] INDEX  {nombre}
+ON {tabla} ( {columna} [, {columna}...] )
+[ WHERE {expresion}
+----
