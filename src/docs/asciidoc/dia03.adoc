@@ -1,0 +1,234 @@
+= Curso de Base de Datos
+Vintec <isidoro.trevino@vintec.mx>
+2019-10-12
+:revnumber: {project-version}
+:example-caption!:
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../java]
+
+
+== Inserciones
+
+* La instrucción INSERT permite insertar(crear) una o más filas
+
+[source,sql]
+----
+INSERT INTO {tabla}
+[({columna} [,...])]
+VALUES ({expresion} [,...])
+----
+
+=== Inserciones
+
+* No importa el orden de las columnas (se especifica en la instrucción)
+* Si no se definen columnas a insertar, se toma el valor default, en caso 
+contrario deja el estado en NULL
+* Se pueden combinar con Secuencias y funciones
+
+== Actualizaciones
+
+* Permite alterar una o más columnas de una o más tuplas
+
+[source,sql]
+----
+UPDATE {tabla}
+SET [ {columna} = {expresion} [, ...] ]
+WHERE [ condicion ]
+----
+
+== Eliminaciones
+
+WARNING: Siempre usar WHERE
+
+[source,sql]
+----
+DELETE FROM {tabla}
+[ WHERE [ condicion ] ]
+----
+
+=== Eliminación total
+
+WARNING: Solo usar en ambientes de prueba
+
+* Sirve para eliminar todas las filas de una tabla
+
+[source,sql]
+----
+TRUNCATE TABLE {tabla}
+----
+
+== Consultas
+
+* A veces se considera como **DQL**
+* Permite aplicar reglas de agrupación, selección y clasificación
+de tablas para generar un resultado
+* **ResultSet** -> Grupo de filas cuyas columnas pueden provenir 
+de una o más fuentes.
+** También contiene la "metadata" o descripción de dicha información
+
+=== SELECT
+
+* En su forma más simple, permite elegir columnas específicas de una
+tabla a partir de condiciones determinadas
+
+[source,sql]
+----
+SELECT [{columna1} [,{columnan},...] | * 
+FROM {tabla} [ AS {alias} ]
+[ WHERE {expresion} ]
+----
+
+=== Algebra Relacional
+
+* Fundamento matemático para la manipulación de series de datos
+* Utilizada de manera interna por los RDBMS para procesar la información
+y generar Result Sets 
+
+=== Joins
+
+* Operación dentro de un select que permite combinar las columnas
+de dos tablas para generar un único result set
+** **Inner Join** -> Integra los resultados donde los valores de las
+columnas comparadas coincidan 
+** **Left Join** -> Integra los resultados donde los valores de las
+columnas comparadas coincidan, o donde los valores de la comparación izquierda
+no coincidan con ningún valor de la derecha
+
+=== Joins
+
+* **Full Outer Join** -> Integra todas las combinaciones posibles
+
+=== Inner Join
+
+image::join.png[]
+
+=== Inner Join
+
+[source,sql]
+----
+SELECT [{columna1} [,{columnan},...] | * 
+FROM {tabla} [ AS {alias} ]
+INNER JOIN {tabla2} [ AS {alias2} ]
+ON {expresion}
+[ WHERE {expresion} ]
+----
+
+=== Left / Right
+
+image::left_join.svg[]
+
+=== Full Outer
+
+image::full_join.svg[]
+
+=== Union
+
+* Permite combinar varios ResultSets en uno solo
+
+[source,sql]
+----
+(SELECT [{columna1} [,{columnan},...] | * 
+FROM {tabla} [ AS {alias} ]
+[ WHERE {expresion} ])
+UNION
+SELECT [{columnaa} [,{columnax},...] | * 
+FROM {tabla2} [ AS {alias2} ]
+[ WHERE {expresion} ]
+----
+
+=== Subqueries
+
+* Cada Query (generalmente un select) devuelve como resultado
+un ResultSet
+* Un ResultSet tiene prácticamente las mismas propiedades de una
+tabla por lo que su comportamiento es similar (aunque no es persistente)
+* Esto permite usar un ResultSet como parte de otro query para procesar
+/ filtrar datos y generar un nuevo Result Set
+
+=== Subqueries
+
+[source,sql]
+----
+SELECT [{columna1} [,{columnan},...] | * 
+FROM {tabla} [ AS {alias} ]
+WHERE columna1 IN (
+	SELECT [...]
+) 
+----
+
+=== Subqueries
+
+[source,sql]
+----
+SELECT [{columna1} [,{columnan},...] | * 
+FROM (
+	SELECT [{columna1} [,{columnan},...] | * 
+	FROM {tabla} [ AS {alias} ]
+	WHERE columna1 IN (
+		SELECT [...]
+	) 
+) AS {alias}
+----
+
+== Funciones
+
+* Las funciones ejecutan una serie de instrucciones que devuelven
+un valor asignable a una columna
+* Las funciones pueden recibir 0, 1 o más argumentos
+* Las funciones regresan un tipo de dato específico
+
+=== Funciones más comunes
+
+* **lower** / **upper** -> Transforman texto en minúsculas / mayúsculas
+* **substring** -> Recortan un texto
+* **trim** -> Eliminan los espacios en los extremos de un texto
+* **replace** -> Reemplaza un pedazo de texto con otro dentro de una columna
+
+=== Funciones más comunes
+
+* **round** -> Redondea un número flotante (decimal)
+* **trunc** -> Elimina los decimales de un número
+* **mod** -> Obtiene el módulo de un número
+* **random** -> Devuelve un número aleatorio
+* **generate_series** -> Genera números secuenciales
+
+=== Funciones más comunes
+
+* **date_part** -> Obtiene una porción de una fecha/hora
+* **current_timestamp** -> Devuelve la fecha/hora actual
+* **interval** -> Tipo de dato para operar con fechas
+
+== Inserciones múltiples
+
+* Se pueden combinar las sentencias **INSERT** con **SELECT**
+para insertar series de datos
+
+[source,sql]
+----
+INSERT INTO {tabla}
+[({columna} [,...])]
+SELECT [{columna1} [,{columnan},...] | * 
+FROM {tabla} [ AS {alias} ]
+[ WHERE {expresion} ]
+----
+
+=== Ejercicio de limpieza de datos
+
+* Limpiar e insertar la información del MoMA en las tablas
+normalizadas
+
+== Indices
+
+* Es una estructura de la base de datos para incrementar la
+velocidad de lectura de información en una tabla
+* Ocupa mayor espacio en almacenamiento
+* Los índices hacen referencia a una o más columnas
+
+=== Indices
+
+[source,sql]
+----
+CREATE [ UNIQUE ] INDEX  {nombre}
+ON {tabla} ( {columna} [, {columna}...] )
+[ WHERE {expresion}
+----

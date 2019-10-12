@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="author" content="Vintec"><title>Curso de Base de Datos</title><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" name="viewport"><link href="reveal.js/css/reveal.css" rel="stylesheet"><link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><style>/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
+/*pre.CodeRay {background-color:#f7f7f8;}*/
+.CodeRay .line-numbers{border-right:1px solid #d8d8d8;padding:0 0.5em 0 .25em}
+.CodeRay span.line-numbers{display:inline-block;margin-right:.5em;color:rgba(0,0,0,.3)}
+.CodeRay .line-numbers strong{color:rgba(0,0,0,.4)}
+table.CodeRay{border-collapse:separate;border-spacing:0;margin-bottom:0;border:0;background:none}
+table.CodeRay td{vertical-align: top;line-height:1.45}
+table.CodeRay td.line-numbers{text-align:right}
+table.CodeRay td.line-numbers>pre{padding:0;color:rgba(0,0,0,.3)}
+table.CodeRay td.code{padding:0 0 0 .5em}
+table.CodeRay td.code>pre{padding:0}
+.CodeRay .debug{color:#fff !important;background:#000080 !important}
+.CodeRay .annotation{color:#007}
+.CodeRay .attribute-name{color:#000080}
+.CodeRay .attribute-value{color:#700}
+.CodeRay .binary{color:#509}
+.CodeRay .comment{color:#998;font-style:italic}
+.CodeRay .char{color:#04d}
+.CodeRay .char .content{color:#04d}
+.CodeRay .char .delimiter{color:#039}
+.CodeRay .class{color:#458;font-weight:bold}
+.CodeRay .complex{color:#a08}
+.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
+.CodeRay .color{color:#099}
+.CodeRay .class-variable{color:#369}
+.CodeRay .decorator{color:#b0b}
+.CodeRay .definition{color:#099}
+.CodeRay .delimiter{color:#000}
+.CodeRay .doc{color:#970}
+.CodeRay .doctype{color:#34b}
+.CodeRay .doc-string{color:#d42}
+.CodeRay .escape{color:#666}
+.CodeRay .entity{color:#800}
+.CodeRay .error{color:#808}
+.CodeRay .exception{color:inherit}
+.CodeRay .filename{color:#099}
+.CodeRay .function{color:#900;font-weight:bold}
+.CodeRay .global-variable{color:#008080}
+.CodeRay .hex{color:#058}
+.CodeRay .integer,.CodeRay .float{color:#099}
+.CodeRay .include{color:#555}
+.CodeRay .inline{color:#000}
+.CodeRay .inline .inline{background:#ccc}
+.CodeRay .inline .inline .inline{background:#bbb}
+.CodeRay .inline .inline-delimiter{color:#d14}
+.CodeRay .inline-delimiter{color:#d14}
+.CodeRay .important{color:#555;font-weight:bold}
+.CodeRay .interpreted{color:#b2b}
+.CodeRay .instance-variable{color:#008080}
+.CodeRay .label{color:#970}
+.CodeRay .local-variable{color:#963}
+.CodeRay .octal{color:#40e}
+.CodeRay .predefined{color:#369}
+.CodeRay .preprocessor{color:#579}
+.CodeRay .pseudo-class{color:#555}
+.CodeRay .directive{font-weight:bold}
+.CodeRay .type{font-weight:bold}
+.CodeRay .predefined-type{color:inherit}
+.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
+.CodeRay .key{color:#808}
+.CodeRay .key .delimiter{color:#606}
+.CodeRay .key .char{color:#80f}
+.CodeRay .value{color:#088}
+.CodeRay .regexp .delimiter{color:#808}
+.CodeRay .regexp .content{color:#808}
+.CodeRay .regexp .modifier{color:#808}
+.CodeRay .regexp .char{color:#d14}
+.CodeRay .regexp .function{color:#404;font-weight:bold}
+.CodeRay .string{color:#d20}
+.CodeRay .string .string .string{background:#ffd0d0}
+.CodeRay .string .content{color:#d14}
+.CodeRay .string .char{color:#d14}
+.CodeRay .string .delimiter{color:#d14}
+.CodeRay .shell{color:#d14}
+.CodeRay .shell .delimiter{color:#d14}
+.CodeRay .symbol{color:#990073}
+.CodeRay .symbol .content{color:#a60}
+.CodeRay .symbol .delimiter{color:#630}
+.CodeRay .tag{color:#008080}
+.CodeRay .tag-special{color:#d70}
+.CodeRay .variable{color:#036}
+.CodeRay .insert{background:#afa}
+.CodeRay .delete{background:#faa}
+.CodeRay .change{color:#aaf;background:#007}
+.CodeRay .head{color:#f8f;background:#505}
+.CodeRay .insert .insert{color:#080}
+.CodeRay .delete .delete{color:#800}
+.CodeRay .change .change{color:#66f}
+.CodeRay .head .head{color:#f4f}</style><link href="reveal.js/lib/css/zenburn.css" rel="stylesheet"><script>var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? "reveal.js/css/print/pdf.css" : "reveal.js/css/print/paper.css";
+document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if lt IE 9]><script src="reveal.js/lib/js/html5shiv.js"></script><![endif]--></head><body><div class="reveal"><div class="slides"><section class="title" data-state="title"><h1>Curso de Base de Datos</h1><p class="author"><small>Vintec</small></p></section><section><section id="slide-inserciones"><h2>Inserciones</h2><div class="ulist"><ul><li><p>La instrucción INSERT permite insertar(crear) una o más filas</p></li></ul></div><div class="listingblock"><div class="content"><pre class="CodeRay"><code class="sql language-sql"><span class="class">INSERT</span> <span class="class">INTO</span> {tabla}
+[({columna} [,...])]
+<span class="keyword">VALUES</span> ({expresion} [,...])</code></pre></div></div></section><section id="slide-inserciones-2"><h2>Inserciones</h2><div class="ulist"><ul><li><p>No importa el orden de las columnas (se especifica en la instrucción)</p></li><li><p>Si no se definen columnas a insertar, se toma el valor default, en caso
+contrario deja el estado en NULL</p></li><li><p>Se pueden combinar con Secuencias y funciones</p></li></ul></div></section></section>
+<section id="slide-actualizaciones"><h2>Actualizaciones</h2><div class="ulist"><ul><li><p>Permite alterar una o más columnas de una o más tuplas</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="CodeRay"><code class="sql language-sql"><span class="class">UPDATE</span> {tabla}
+<span class="class">SET</span> [ {columna} = {expresion} [, ...] ]
+<span class="keyword">WHERE</span> [ condicion ]</code></pre></div></div></section>
+<section><section id="slide-eliminaciones"><h2>Eliminaciones</h2><div class="admonitionblock warning"><table><tr><td class="icon"><i class="fa fa-warning" title="Warning"></i></td><td class="content">Siempre usar WHERE</td></tr></table></div><div class="listingblock"><div class="content"><pre class="CodeRay"><code class="sql language-sql"><span class="class">DELETE</span> <span class="keyword">FROM</span> {tabla}
+[ <span class="keyword">WHERE</span> [ condicion ] ]</code></pre></div></div></section><section id="slide-eliminacin-total"><h2>Eliminación total</h2><div class="admonitionblock warning"><table><tr><td class="icon"><i class="fa fa-warning" title="Warning"></i></td><td class="content">Solo usar en ambientes de prueba</td></tr></table></div>
+<div class="ulist"><ul><li><p>Sirve para eliminar todas las filas de una tabla</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="CodeRay"><code class="sql language-sql"><span class="class">TRUNCATE</span> <span class="type">TABLE</span> {tabla}</code></pre></div></div></section></section>
+<section><section id="slide-consultas"><h2>Consultas</h2><div class="ulist"><ul><li><p>A veces se considera como <strong>DQL</strong></p></li><li><p>Permite aplicar reglas de agrupación, selección y clasificación
+de tablas para generar un resultado</p></li><li><p><strong>ResultSet</strong> &#8594; Grupo de filas cuyas columnas pueden provenir
+de una o más fuentes.</p><div class="ulist"><ul><li><p>También contiene la "metadata" o descripción de dicha información</p></li></ul></div></li></ul></div></section><section id="slide-select"><h2>SELECT</h2><div class="ulist"><ul><li><p>En su forma más simple, permite elegir columnas específicas de una
+tabla a partir de condiciones determinadas</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="CodeRay"><code class="sql language-sql"><span class="class">SELECT</span> [{columna1} [,{columnan},...] | *
+<span class="keyword">FROM</span> {tabla} [ <span class="keyword">AS</span> {alias} ]
+[ <span class="keyword">WHERE</span> {expresion} ]</code></pre></div></div></section><section id="slide-algebra-relacional"><h2>Algebra Relacional</h2><div class="ulist"><ul><li><p>Fundamento matemático para la manipulación de series de datos</p></li><li><p>Utilizada de manera interna por los RDBMS para procesar la información
+y generar Result Sets</p></li></ul></div></section><section id="slide-joins"><h2>Joins</h2><div class="ulist"><ul><li><p>Operación dentro de un select que permite combinar las columnas
+de dos tablas para generar un único result set</p><div class="ulist"><ul><li><p><strong>Inner Join</strong> &#8594; Integra los resultados donde los valores de las
+columnas comparadas coincidan</p></li><li><p><strong>Left Join</strong> &#8594; Integra los resultados donde los valores de las
+columnas comparadas coincidan, o donde los valores de la comparación izquierda
+no coincidan con ningún valor de la derecha</p></li></ul></div></li></ul></div></section><section id="slide-joins-2"><h2>Joins</h2><div class="ulist"><ul><li><p><strong>Full Outer Join</strong> &#8594; Integra todas las combinaciones posibles</p></li></ul></div></section><section id="slide-inner-join"><h2>Inner Join</h2><div class="imageblock" style=""><img src="./images/join.png" alt="join"></div></section><section id="slide-inner-join-2"><h2>Inner Join</h2><div class="listingblock"><div class="content"><pre class="CodeRay"><code class="sql language-sql"><span class="class">SELECT</span> [{columna1} [,{columnan},...] | *
+<span class="keyword">FROM</span> {tabla} [ <span class="keyword">AS</span> {alias} ]
+<span class="keyword">INNER</span> <span class="keyword">JOIN</span> {tabla2} [ <span class="keyword">AS</span> {alias2} ]
+<span class="keyword">ON</span> {expresion}
+[ <span class="keyword">WHERE</span> {expresion} ]</code></pre></div></div></section><section id="slide-left-right"><h2>Left / Right</h2><div class="imageblock" style=""><img src="./images/left_join.svg" alt="left join"></div></section><section id="slide-full-outer"><h2>Full Outer</h2><div class="imageblock" style=""><img src="./images/full_join.svg" alt="full join"></div></section><section id="slide-union"><h2>Union</h2><div class="ulist"><ul><li><p>Permite combinar varios ResultSets en uno solo</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="CodeRay"><code class="sql language-sql">(<span class="class">SELECT</span> [{columna1} [,{columnan},...] | *
+<span class="keyword">FROM</span> {tabla} [ <span class="keyword">AS</span> {alias} ]
+[ <span class="keyword">WHERE</span> {expresion} ])
+<span class="keyword">UNION</span>
+<span class="class">SELECT</span> [{columnaa} [,{columnax},...] | *
+<span class="keyword">FROM</span> {tabla2} [ <span class="keyword">AS</span> {alias2} ]
+[ <span class="keyword">WHERE</span> {expresion} ]</code></pre></div></div></section><section id="slide-subqueries"><h2>Subqueries</h2><div class="ulist"><ul><li><p>Cada Query (generalmente un select) devuelve como resultado
+un ResultSet</p></li><li><p>Un ResultSet tiene prácticamente las mismas propiedades de una
+tabla por lo que su comportamiento es similar (aunque no es persistente)</p></li><li><p>Esto permite usar un ResultSet como parte de otro query para procesar
+/ filtrar datos y generar un nuevo Result Set</p></li></ul></div></section><section id="slide-subqueries-2"><h2>Subqueries</h2><div class="listingblock"><div class="content"><pre class="CodeRay"><code class="sql language-sql"><span class="class">SELECT</span> [{columna1} [,{columnan},...] | *
+<span class="keyword">FROM</span> {tabla} [ <span class="keyword">AS</span> {alias} ]
+<span class="keyword">WHERE</span> columna1 <span class="keyword">IN</span> (
+        <span class="class">SELECT</span> [...]
+)</code></pre></div></div></section><section id="slide-subqueries-3"><h2>Subqueries</h2><div class="listingblock"><div class="content"><pre class="CodeRay"><code class="sql language-sql"><span class="class">SELECT</span> [{columna1} [,{columnan},...] | *
+<span class="keyword">FROM</span> (
+        <span class="class">SELECT</span> [{columna1} [,{columnan},...] | *
+        <span class="keyword">FROM</span> {tabla} [ <span class="keyword">AS</span> {alias} ]
+        <span class="keyword">WHERE</span> columna1 <span class="keyword">IN</span> (
+                <span class="class">SELECT</span> [...]
+        )
+) <span class="keyword">AS</span> {alias}</code></pre></div></div></section></section>
+<section><section id="slide-funciones"><h2>Funciones</h2><div class="ulist"><ul><li><p>Las funciones ejecutan una serie de instrucciones que devuelven
+un valor asignable a una columna</p></li><li><p>Las funciones pueden recibir 0, 1 o más argumentos</p></li><li><p>Las funciones regresan un tipo de dato específico</p></li></ul></div></section><section id="slide-funciones-ms-comunes"><h2>Funciones más comunes</h2><div class="ulist"><ul><li><p><strong>lower</strong> / <strong>upper</strong> &#8594; Transforman texto en minúsculas / mayúsculas</p></li><li><p><strong>substring</strong> &#8594; Recortan un texto</p></li><li><p><strong>trim</strong> &#8594; Eliminan los espacios en los extremos de un texto</p></li><li><p><strong>replace</strong> &#8594; Reemplaza un pedazo de texto con otro dentro de una columna</p></li></ul></div></section><section id="slide-funciones-ms-comunes-2"><h2>Funciones más comunes</h2><div class="ulist"><ul><li><p><strong>round</strong> &#8594; Redondea un número flotante (decimal)</p></li><li><p><strong>trunc</strong> &#8594; Elimina los decimales de un número</p></li><li><p><strong>mod</strong> &#8594; Obtiene el módulo de un número</p></li><li><p><strong>random</strong> &#8594; Devuelve un número aleatorio</p></li><li><p><strong>generate_series</strong> &#8594; Genera números secuenciales</p></li></ul></div></section><section id="slide-funciones-ms-comunes-3"><h2>Funciones más comunes</h2><div class="ulist"><ul><li><p><strong>date_part</strong> &#8594; Obtiene una porción de una fecha/hora</p></li><li><p><strong>current_timestamp</strong> &#8594; Devuelve la fecha/hora actual</p></li><li><p><strong>interval</strong> &#8594; Tipo de dato para operar con fechas</p></li></ul></div></section></section>
+<section><section id="slide-inserciones-mltiples"><h2>Inserciones múltiples</h2><div class="ulist"><ul><li><p>Se pueden combinar las sentencias <strong>INSERT</strong> con <strong>SELECT</strong>
+para insertar series de datos</p></li></ul></div><div class="listingblock"><div class="content"><pre class="CodeRay"><code class="sql language-sql"><span class="class">INSERT</span> <span class="class">INTO</span> {tabla}
+[({columna} [,...])]
+<span class="class">SELECT</span> [{columna1} [,{columnan},...] | *
+<span class="keyword">FROM</span> {tabla} [ <span class="keyword">AS</span> {alias} ]
+[ <span class="keyword">WHERE</span> {expresion} ]</code></pre></div></div></section><section id="slide-ejercicio-de-limpieza-de-datos"><h2>Ejercicio de limpieza de datos</h2><div class="ulist"><ul><li><p>Limpiar e insertar la información del MoMA en las tablas
+normalizadas</p></li></ul></div></section></section>
+<section><section id="slide-indices"><h2>Indices</h2><div class="ulist"><ul><li><p>Es una estructura de la base de datos para incrementar la
+velocidad de lectura de información en una tabla</p></li><li><p>Ocupa mayor espacio en almacenamiento</p></li><li><p>Los índices hacen referencia a una o más columnas</p></li></ul></div></section><section id="slide-indices-2"><h2>Indices</h2><div class="listingblock"><div class="content"><pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> [ <span class="directive">UNIQUE</span> ] <span class="type">INDEX</span>  {nombre}
+<span class="keyword">ON</span> {tabla} ( {columna} [, {columna}...] )
+[ <span class="keyword">WHERE</span> {expresion}</code></pre></div></div></section></section></div></div><script src="reveal.js/lib/js/head.min.js"></script><script src="reveal.js/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
+Reveal.initialize({
+  // Display controls in the bottom right corner
+  controls: true,
+  // Display a presentation progress bar
+  progress: true,
+  // Set a per-slide timing for speaker notes, null means none
+  defaultTiming: null,
+  // Display the page number of the current slide
+  slideNumber: true,
+  // Push each slide change to the browser history
+  history: true,
+  // Enable keyboard shortcuts for navigation
+  keyboard: true,
+  // Enable the slide overview mode
+  overview: true,
+  // Vertical centering of slides
+  center: true,
+  // Enables touch navigation on devices with touch input
+  touch: true,
+  // Loop the presentation
+  loop: false,
+  // Change the presentation direction to be RTL
+  rtl: false,
+  // Randomizes the order of slides each time the presentation loads
+  shuffle: false,
+  // Turns fragments on and off globally
+  fragments: true,
+  // Flags if the presentation is running in an embedded mode,
+  // i.e. contained within a limited portion of the screen
+  embedded: false,
+  // Flags if we should show a help overlay when the questionmark
+  // key is pressed
+  help: true,
+  // Flags if speaker notes should be visible to all viewers
+  showNotes: false,
+  // Global override for autolaying embedded media (video/audio/iframe)
+  // - null: Media will only autoplay if data-autoplay is present
+  // - true: All media will autoplay, regardless of individual setting
+  // - false: No media will autoplay, regardless of individual setting
+  autoPlayMedia: null,
+  // Number of milliseconds between automatically proceeding to the
+  // next slide, disabled when set to 0, this value can be overwritten
+  // by using a data-autoslide attribute on your slides
+  autoSlide: 0,
+  // Stop auto-sliding after user input
+  autoSlideStoppable: true,
+  // Enable slide navigation via mouse wheel
+  mouseWheel: false,
+  // Hides the address bar on mobile devices
+  hideAddressBar: true,
+  // Opens links in an iframe preview overlay
+  previewLinks: false,
+  // Theme (e.g., beige, black, league, night, serif, simple, sky, solarized, white)
+  // NOTE setting the theme in the config no longer works in reveal.js 3.x
+  //theme: Reveal.getQueryHash().theme || 'white',
+  // Transition style (e.g., none, fade, slide, convex, concave, zoom)
+  transition: Reveal.getQueryHash().transition || 'linear',
+  // Transition speed (e.g., default, fast, slow)
+  transitionSpeed: 'default',
+  // Transition style for full page slide backgrounds (e.g., none, fade, slide, convex, concave, zoom)
+  backgroundTransition: 'fade',
+  // Number of slides away from the current that are visible
+  viewDistance: 3,
+  // Parallax background image (e.g., "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'")
+  parallaxBackgroundImage: '',
+  // Parallax background size in CSS syntax (e.g., "2100px 900px")
+  parallaxBackgroundSize: '',
+
+  // The "normal" size of the presentation, aspect ratio will be preserved
+  // when the presentation is scaled to fit different resolutions. Can be
+  // specified using percentage units.
+  width: 960,
+  height: 700,
+
+  // Factor of the display size that should remain empty around the content
+  margin: 0.1,
+
+  // Bounds for smallest/largest possible scale to apply to content
+  minScale: 0.2,
+  maxScale: 1.5,
+
+  // Optional libraries used to extend on reveal.js
+  dependencies: [
+      { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      
+      { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+      { src: 'reveal.js/plugin/notes/notes.js', async: true }
+  ]
+});</script></body></html>
